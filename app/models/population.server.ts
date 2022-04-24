@@ -1,5 +1,5 @@
 import { RESASClient } from "~/apiUtiles";
-import type { Prefecture } from "~/routes/populations";
+import type { Prefecture } from "./types";
 
 type GetData = {
   message: string;
