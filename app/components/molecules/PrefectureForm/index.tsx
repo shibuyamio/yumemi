@@ -1,15 +1,12 @@
-import { Form, useSubmit } from "@remix-run/react";
-import type { Prefecture } from "~/models/types";
+import { Form, useLoaderData, useSubmit } from "@remix-run/react";
+
+import type { LoaderData } from "~/routes/populations";
 
 import PrefectureInput from "./PrefectureInput";
 
-type Props = {
-  prefectureItems: Prefecture[];
-};
-
-const PrefectureForm: React.FC<Props> = ({ prefectureItems }) => {
+const PrefectureForm: React.FC = () => {
   const submit = useSubmit();
-
+  const data = useLoaderData() as LoaderData;
   function handleChange(event: React.ChangeEvent<HTMLFormElement>) {
     submit(event.currentTarget, { replace: true });
   }
@@ -18,7 +15,7 @@ const PrefectureForm: React.FC<Props> = ({ prefectureItems }) => {
     <div className="h-64 overflow-auto">
       <Form method="post" onChange={handleChange}>
         <fieldset className="grid grid-cols-3 gap-4 border-t border-b border-gray-200 sm:grid-cols-4">
-          {prefectureItems.map((prefecture) => {
+          {data.prefectureItems.map((prefecture) => {
             return (
               <PrefectureInput
                 key={prefecture.prefCode}
